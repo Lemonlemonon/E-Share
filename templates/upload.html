@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <h1>File Upload and Display</h1>
+    <form action="/upload" enctype="multipart/form-data" method="POST">
+        <input type="file" name="file" multiple>
+        <input type="submit" value="Upload">
+    </form>
+    <h2>Uploaded Files:</h2>
+    <ul>
+        {% for file in files %}
+            <li>
+                {% if file.lower().endswith(('png', 'jpg', 'jpeg', 'gif')) %}
+                    <a href="/download/{{ file }}"><img src="/download/{{ file }}" alt="{{ file }}" style="max-height: 100px; max-width: 100px;"></a>
+                {% else %}
+                    <a href="/download/{{ file }}">{{ file }}</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <ul class="QRCode">
+        <li>
+                <img src="/getQRCode" alt="QRCode" style="max-height: 100px; max-width: 100px;"></a>
+        </li>
+        <h2>{{url}}</h2>
+    </ul>
+</body>
+</html>
